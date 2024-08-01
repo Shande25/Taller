@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Página de Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #141414;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
+        .menu-toggle img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a, .right-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover, .right-links a:hover {
+            text-decoration: underline;
+        }
+
+        .right-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero {
+            position: relative;
+            height: 60vh; /* Ajusta la altura según tus necesidades */
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel img {
+            width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+            height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
+            object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor, manteniendo la relación de aspecto */
+            flex-shrink: 0; /* Evita que las imágenes se reduzcan */
+        }
+
+
+
+
+        .content {
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        .image-item {
+            width: 100%;
+            padding-top: 150%; /* Proporciona una relación de aspecto de 2:3 */
+            position: relative;
+            overflow: hidden;
+            background-color: #333; /* Color de fondo en caso de que la imagen no cargue */
+        }
+
+        .image-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta la imagen para cubrir el cuadro sin recortarla */
+        }
+
+        .image-item h3 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #000;
+            width: 100%;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .menu a:hover {
+            background-color: #333;
+        }
+
+        .menu.show {
+            display: flex;
+        }
+
+        .footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">
+        <img src="/imagenes/Logonetflix.png" alt="Logo Netflix">
+    </div>
+
+    <div class="nav-links">
+        <a href="/index">Inicio</a>
+        <a href="/index">Novelas</a>
+        <a href="/quienesSomos">QuienesSomos?</a>
+    </div>
+    <div class="right-links">
+        <a href="/registro">Iniciar sesión</a>
+
+    </div>
+</nav>
+
+<div class="menu" id="menu">
+    <a href="#">Inicio</a>
+    <a href="#">Novelas</a>
+    <a href="#">Películas</a>
+    <a href="#">Iniciar sesión</a>
+    <a href="#">Registrarse</a>
+</div>
+<div class="hero">
+    <div class="carousel" id="carousel">
+        <img src="https://larepublica.cronosmedia.glr.pe/original/2022/04/05/624cca02359a274a701a67f1.jpg" alt="Imagen 1">
+        <img src="https://img.asmedia.epimg.net/resizer/v2/OFYY45W5PBHPFKAAEAE5UOY7PU.jpg?auth=4f36cc6afc182a0dfb614f1af16ac5f734d4bd0106a95474e009989ec8348a44&width=1472&height=828&smart=true" alt="Imagen 2">
+        <img src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/VJWYFVIK7BHCLGY53LXYEHIJXQ.jpg" alt="Imagen 3">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtk2S6XtfqIXa0xqxInTm4KzGQIzfNC7ll876sIFUZy_p5ZaT3ONFSA7oztNFPQ4c2NB9O2MaYUJWebawM2U_LT0q8mwAsxyk8Sbpx18dSaL4zOfslwYSbUcw7kgBOeY5Ez0di3x1iC3sP/s1600/mazerunner.jpg" alt="Imagen 4">
+    </div>
+</div>
+<div class="content">
+    <div class="section">
+        <h2>Películas</h2>
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="https://es.web.img3.acsta.net/img/3f/2e/3f2efc609e5e23d748f1d44231bf6b2f.jpg" alt="Pelicula 1">
+                <h3>Dead Pool</h3>
+            </div>
+            <div class="image-item">
+                <img src="https://es.web.img2.acsta.net/pictures/18/12/27/10/54/4850727.jpg" alt="Pelicula 2">
+                <h3>Alita</h3>
+            </div>
+            <div class="image-item">
+                <img src="https://play-lh.googleusercontent.com/9C8oKfeuoQicXp8JmbHEZibQt11YQOWgZZ0LsmwQkQiAcffV1IsBfPtGg-VXulD7sGwj" alt="Pelicula 3">
+                <h3>The Amazing Spiderman</h3>
+            </div>
+            <div class="image-item">
+                <img src="https://m.media-amazon.com/images/S/pv-target-images/1123242b965aa683e2b0e4e0f5b17dbb22aadd2eabc6e6c0c383b65f64c14416.jpg" alt="Pelicula 4">
+                <h3>Correr o Morrir</h3>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Novelas</h2>
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="https://es.web.img3.acsta.net/pictures/22/07/18/09/46/0231821.jpg" alt="Novela 1">
+                <h3>Veinticinco, veintiuno</h3>
+            </div>
+            <div class="image-item">
+                <img src="https://pics.filmaffinity.com/Propuesta_laboral_Serie_de_TV-459472764-large.jpg" alt="Novela 2">
+                <h3>Propuesta laboral</h3>
+            </div>
+            <div class="image-item">
+                <img src="https://www.lavanguardia.com/peliculas-series/images/serie/poster/2020/12/w1280/gaCOvKGG2qEnsijNHEAigYcQ1U3.jpg" alt="Novela 3">
+                <h3>Belleza verdadera</h3>
+            </div>
+            <div class="image-item">
+                <img src="https://i.pinimg.com/736x/08/69/31/08693187e18793085030bb0e446b95ad.jpg" alt="Novela 4">
+                <h3>Un amor tan hermoso</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Netflix, Inc. Todos los derechos reservados.</p>
+</div>
+
+<script>
+    const carousel = document.getElementById('carousel');
+    const images = carousel.getElementsByTagName('img');
+    let index = 0;
+
+    function showNextImage() {
+        index = (index + 1) % images.length;
+        const offset = -index * 100;
+        carousel.style.transform = `translateX(${offset}vw)`;
+    }
+
+    setInterval(showNextImage, 3000); // Cambia de imagen cada 3 segundos
+</script>
+
+
+</body>
+</html>
