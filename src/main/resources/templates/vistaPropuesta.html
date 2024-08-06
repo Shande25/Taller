@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Detalle de Película</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #141414;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links, .right-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a, .right-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover, .right-links a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 20px;
+            margin-top: 100px;
+            flex: 1;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .description-container {
+            background-color: #000;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 1400px;
+            width: 90%;
+        }
+
+        .description {
+            text-align: center;
+        }
+
+        .description h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .description p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .description ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .description ul li {
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+
+        .suggestions {
+            margin: 20px 0;
+        }
+
+        .suggestions h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .suggestions .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        .suggestions .image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .suggestions .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .suggestions .image-item:hover {
+            transform: scale(1.05);
+        }
+
+        .suggestions .image-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .suggestions .image-item h3 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        .footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">
+        <img src="/imagenes/Logonetflix.png" alt="Logo Netflix">
+    </div>
+    <div class="nav-links">
+        <a href="/index">Inicio</a>
+        <a href="/novelas">Novelas</a>
+        <a href="/quienesSomos">¿Quiénes Somos?</a>
+    </div>
+    <div class="right-links">
+        <a href="/registro">Iniciar sesión</a>
+    </div>
+</nav>
+
+<div class="content">
+    <div class="video-container">
+        <iframe
+                src="https://www.youtube.com/embed/RnxHZyeU4DI?autoplay=1&rel=0&modestbranding=1"
+                allowfullscreen>
+        </iframe>
+    </div>
+    <div class="description-container">
+        <div class="description">
+            <h1>Propuesta Laboral</h1>
+            <p>En un entorno laboral competitivo, una joven se presenta a una entrevista para el puesto de sus sueños. Durante el proceso, debe enfrentarse a diversos desafíos y preguntas inesperadas que la llevan a reflexionar sobre sus propias capacidades y aspiraciones. La serie explora temas de auto-descubrimiento y crecimiento personal mientras la protagonista navega por el complejo mundo de las entrevistas laborales y las expectativas profesionales.</p>
+            <p><strong>Sinopsis Breve:</strong> La serie sigue a una joven profesional que se enfrenta a una serie de desafíos durante una entrevista crucial para el puesto de sus sueños. A medida que avanza el proceso, debe lidiar con preguntas difíciles y reflexionar sobre su propia carrera y aspiraciones. La serie destaca el crecimiento personal y las realidades del mundo laboral.</p>
+            <p><strong>Director:</strong> Kim Jung-kwon</p>
+            <p><strong>Elenco Principal:</strong></p>
+            <ul>
+                <li>Kim Se-jeong como Kim Mi-kyeong</li>
+                <li>Yoon Doo-joon como Lee Seong-joo</li>
+            </ul>
+            <p><strong>Año de Lanzamiento:</strong> 2022</p>
+        </div>
+    </div>
+
+    <div class="suggestions">
+        <h2>Más para ver</h2>
+        <div class="image-grid">
+            <div class="image-item">
+                <a href="index.html">
+                    <img src="https://es.web.img3.acsta.net/pictures/22/07/18/09/46/0231821.jpg" alt="Película 1">
+                    <h3>Veinticinco, veintiuno</h3>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="pagina2.html">
+                    <img src="https://www.lavanguardia.com/peliculas-series/images/serie/poster/2020/12/w1280/gaCOvKGG2qEnsijNHEAigYcQ1U3.jpg" alt="Película 2">
+                    <h3>Belleza verdadera </h3>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="pagina3.html">
+                    <img src="https://i.pinimg.com/736x/08/69/31/08693187e18793085030bb0e446b95ad.jpg" alt="Película 3">
+                    <h3>Un amor tan hermoso</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Netflix, Inc. Todos los derechos reservados.</p>
+</div>
+
+</body>
+</html>

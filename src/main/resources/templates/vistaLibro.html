@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix - Detalle de Película</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background-color: #141414;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #000;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .nav-links, .right-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a, .right-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .nav-links a:hover, .right-links a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      padding: 20px;
+      margin-top: 100px;
+      flex: 1;
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .description-container {
+      background-color: #000;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 20px auto;
+      max-width: 1400px;
+      width: 90%;
+    }
+
+    .description {
+      text-align: center;
+    }
+
+    .description h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .description p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .description ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .description ul li {
+      font-size: 1.1rem;
+      margin: 5px 0;
+    }
+
+    .suggestions {
+      margin: 20px 0;
+    }
+
+    .suggestions h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .suggestions .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      justify-content: center;
+      margin: 0 auto;
+      max-width: 100%;
+      padding: 0 10px;
+    }
+
+    .suggestions .image-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .suggestions .image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .suggestions .image-item:hover {
+      transform: scale(1.05);
+    }
+
+    .suggestions .image-item a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+
+    .suggestions .image-item h3 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 5px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      font-size: 0.8rem;
+    }
+
+    .footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo">
+    <img src="/imagenes/Logonetflix.png" alt="Logo Netflix">
+  </div>
+  <div class="nav-links">
+    <a href="/index">Inicio</a>
+    <a href="/novelas">Novelas</a>
+    <a href="/quienesSomos">¿Quiénes Somos?</a>
+  </div>
+  <div class="right-links">
+    <a href="/registro">Iniciar sesión</a>
+  </div>
+</nav>
+
+<div class="video-container">
+  <iframe
+          src="https://www.youtube.com/embed/Z8iBblJ4vH4?rel=0"
+          allowfullscreen>
+  </iframe>
+</div>
+<div class="description-container">
+  <div class="description">
+    <h1>El Libro de la Vida</h1>
+    <p>En el Día de los Muertos, Manolo, un joven dividido entre cumplir las expectativas de su familia y seguir su corazón, se embarca en una increíble aventura a través de tres mundos fantásticos para reunirse con su amor verdadero y defender su aldea. En el camino, debe enfrentar sus mayores miedos y desafíos, mientras descubre el verdadero significado de la vida y la muerte.</p>
+    <p><strong>Sinopsis Breve:</strong> Manolo, un joven con pasión por la música, se enfrenta a una encrucijada entre cumplir con las expectativas familiares o seguir su corazón. En su viaje a través del inframundo, Manolo encuentra personajes mágicos y descubre su verdadera vocación, mientras aprende sobre el poder de la memoria y el amor.</p>
+    <p><strong>Director:</strong> Jorge R. Gutiérrez</p>
+    <p><strong>Elenco Principal:</strong></p>
+    <ul>
+      <li>Diego Luna como Manolo</li>
+      <li>Zoë Saldaña como María</li>
+      <li>Channing Tatum como Joaquín</li>
+    </ul>
+    <p><strong>Año de Lanzamiento:</strong> 2014</p>
+  </div>
+</div>
+
+<div class="suggestions">
+  <h2>Más para ver</h2>
+  <div class="image-grid">
+    <div class="image-item">
+      <a href="index.html">
+        <img src="https://es.web.img3.acsta.net/img/3f/2e/3f2efc609e5e23d748f1d44231bf6b2f.jpg" alt="Película 1">
+        <h3>DeadPool</h3>
+      </a>
+    </div>
+    <div class="image-item">
+      <a href="pagina2.html">
+        <img src="https://es.web.img2.acsta.net/pictures/18/12/27/10/54/4850727.jpg" alt="Película 2">
+        <h3>Alita</h3>
+      </a>
+    </div>
+    <div class="image-item">
+      <a href="pagina3.html">
+        <img src="https://m.media-amazon.com/images/S/pv-target-images/1123242b965aa683e2b0e4e0f5b17dbb22aadd2eabc6e6c0c383b65f64c14416.jpg" alt="Película 3">
+        <h3>Correr o Morrir</h3>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>&copy; 2024 Netflix, Inc. Todos los derechos reservados.</p>
+</div>
+
+</body>
+</html>
