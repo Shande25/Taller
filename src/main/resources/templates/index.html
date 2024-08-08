@@ -19,18 +19,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 10px 20px;
             background-color: #000;
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .logo img {
@@ -68,7 +64,24 @@
 
         .right-links {
             display: flex;
-            gap: 15px;
+            gap: 10px;
+            margin-right: 40px;
+        }
+
+        .subscribe-button {
+            background-color: #E50914;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001; /* Asegura que el botón esté por encima del menú desplegable */
+        }
+
+        .subscribe-button:hover {
+            background-color: #b81d24;
         }
 
         .hero {
@@ -76,7 +89,6 @@
             height: 60vh; /* Ajusta la altura según tus necesidades */
             overflow: hidden;
             margin-top: 80px;
-
         }
 
         .carousel {
@@ -87,13 +99,11 @@
         }
 
         .carousel img {
-            width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
-            height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
-            object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor, manteniendo la relación de aspecto */
-            flex-shrink: 0; /* Evita que las imágenes se reduzcan */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
         }
-
-
 
 
         .content {
@@ -125,20 +135,20 @@
             display: block;
             position: relative;
             overflow: hidden;
-            text-decoration: none; /* Elimina el subrayado del enlace */
+            text-decoration: none;
         }
 
         .image-item {
             width: 100%;
-            padding-top: 150%; /* Proporciona una relación de aspecto de 2:3 */
+            padding-top: 150%;
             position: relative;
             overflow: hidden;
-            background-color: #333; /* Color de fondo en caso de que la imagen no cargue */
-            transition: transform 0.3s ease-in-out; /* Transición suave para el efecto de hover */
+            background-color: #333;
+            transition: transform 0.3s ease-in-out;
         }
 
         .image-item:hover {
-            transform: scale(1.05); /* Agranda la imagen al pasar el ratón */
+            transform: scale(1.05);
         }
 
         .image-item img {
@@ -147,7 +157,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ajusta la imagen para cubrir el cuadro sin recortarla */
+            object-fit: cover;
         }
 
         .image-item h3 {
@@ -163,7 +173,6 @@
             font-size: 1rem;
         }
 
-
         .menu {
             display: none;
             flex-direction: column;
@@ -174,7 +183,7 @@
             width: 100%;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            z-index: 1001;
+            z-index: 1002; /* Asegura que el menú esté por encima de la navbar */
         }
 
         .menu a {
@@ -200,7 +209,6 @@
             padding: 20px;
             width: 100%;
         }
-
     </style>
 </head>
 <body>
@@ -211,22 +219,28 @@
 
     <div class="nav-links">
         <a href="/index">Inicio</a>
-        <a href="#novela">Novelas</a>
-        <a href="/quienesSomos">QuienesSomos?</a>
+        <a href="#novelas">Novelas</a>
+        <a href="/quienesSomos">Quienes Somos</a>
     </div>
+    <form id="searchForm">
+        <input type="text" id="searchQuery" name="query" placeholder="Buscar...">
+        <button type="submit">Buscar</button>
+    </form>
+    <div id="searchResults" class="search-results"></div>
     <div class="right-links">
-        <a href="/registro">Iniciar sesión</a>
-
+        <a href="/iniciarsesion" class="subscribe-button">Iniciar sesión</a>
+        <a href="/registro" class="subscribe-button">Registrarse</a>
+        <a href="/suscripcion" class="subscribe-button">Suscripción</a>
     </div>
 </nav>
-
 <div class="menu" id="menu">
-    <a href="#">Inicio</a>
-    <a href="#">Novelas</a>
-    <a href="#">Películas</a>
-    <a href="#">Iniciar sesión</a>
-    <a href="#">Registrarse</a>
+    <a href="/index">Inicio</a>
+    <a href="#novela">Novelas</a>
+    <a href="/peliculas">Películas</a>
+    <a href="/registro">Iniciar sesión</a>
+    <a href="/registro">Registrarse</a>
 </div>
+
 <div class="hero">
     <div class="carousel" id="carousel">
         <img src="https://larepublica.cronosmedia.glr.pe/original/2022/04/05/624cca02359a274a701a67f1.jpg" alt="Imagen 1">
@@ -235,8 +249,9 @@
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtk2S6XtfqIXa0xqxInTm4KzGQIzfNC7ll876sIFUZy_p5ZaT3ONFSA7oztNFPQ4c2NB9O2MaYUJWebawM2U_LT0q8mwAsxyk8Sbpx18dSaL4zOfslwYSbUcw7kgBOeY5Ez0di3x1iC3sP/s1600/mazerunner.jpg" alt="Imagen 4">
     </div>
 </div>
+
 <div class="content" id="peliculas">
-    <div class="section" >
+    <div class="section">
         <h2>Películas</h2>
         <div class="image-grid">
             <a href="/vistaDeadPool" class="image-item">
@@ -253,11 +268,11 @@
             </a>
             <a href="/vistaCorrer" class="image-item">
                 <img src="https://m.media-amazon.com/images/S/pv-target-images/1123242b965aa683e2b0e4e0f5b17dbb22aadd2eabc6e6c0c383b65f64c14416.jpg" alt="Pelicula 4">
-                <h3>Correr o Morrir</h3>
+                <h3>Correr o Morir</h3>
             </a>
         </div>
     </div>
-    <div class="section" id="novela">
+    <div class="section" id="novelas">
         <h2>Novelas</h2>
         <div class="image-grid">
             <a href="/vista20" class="image-item">
@@ -268,7 +283,7 @@
                 <img src="https://images.justwatch.com/poster/317257102/s718/a-business-proposal.jpg" alt="Novela 2">
                 <h3>Propuesta laboral</h3>
             </a>
-            <a href="vistaBelleza" class="image-item">
+            <a href="/vistaBelleza" class="image-item">
                 <img src="https://www.lavanguardia.com/peliculas-series/images/serie/poster/2020/12/w1280/gaCOvKGG2qEnsijNHEAigYcQ1U3.jpg" alt="Novela 3">
                 <h3>Belleza verdadera</h3>
             </a>
@@ -280,25 +295,81 @@
     </div>
 </div>
 
-
 <div class="footer">
-    <p>&copy; 2024 Netflix, Inc. Todos los derechos reservados.</p>
+    <p>&copy; 2024 Netflix. Todos los derechos reservados.</p>
 </div>
 
 <script>
-    const carousel = document.getElementById('carousel');
-    const images = carousel.getElementsByTagName('img');
-    let index = 0;
+    document.getElementById('searchForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-    function showNextImage() {
-        index = (index + 1) % images.length;
-        const offset = -index * 100;
-        carousel.style.transform = `translateX(${offset}vw)`;
+        const query = document.getElementById('searchQuery').value;
+        console.log('Buscando:', query); // Depuración: Imprime la consulta
+
+        try {
+            const response = await fetch(`/buscar?query=${encodeURIComponent(query)}`);
+
+            if (response.ok) {
+                const peliculas = await response.json();
+                console.log('Resultados:', peliculas); // Depuración: Imprime los resultados
+
+                const resultsContainer = document.getElementById('searchResults');
+                resultsContainer.innerHTML = '';
+
+                if (peliculas.length > 0) {
+                    peliculas.forEach(pelicula => {
+                        const item = document.createElement('a');
+                        item.href = `/vistaPelicula/${pelicula.id}`;
+                        item.className = 'image-item';
+
+                        const img = document.createElement('img');
+                        img.src = pelicula.imagenUrl;
+                        img.alt = pelicula.nombre;
+
+                        const title = document.createElement('h3');
+                        title.textContent = pelicula.nombre;
+
+                        item.appendChild(img);
+                        item.appendChild(title);
+                        resultsContainer.appendChild(item);
+                    });
+                } else {
+                    resultsContainer.innerHTML = '<p>No se encontraron resultados.</p>';
+                }
+            } else {
+                console.error('Error en la solicitud:', response.status, response.statusText);
+                const resultsContainer = document.getElementById('searchResults');
+                resultsContainer.innerHTML = '<p>Error al buscar. Inténtalo de nuevo más tarde.</p>';
+            }
+        } catch (error) {
+            console.error('Error en la búsqueda:', error);
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '<p>Error al buscar. Inténtalo de nuevo más tarde.</p>';
+        }
+    });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('menu');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
     }
 
-    setInterval(showNextImage, 3000); // Cambia de imagen cada 3 segundos
+    const carousel = document.getElementById('carousel');
+    if (carousel) {
+        let index = 0;
+        const images = carousel.querySelectorAll('img');
+        const totalImages = images.length;
+
+        function nextImage() {
+            index = (index + 1) % totalImages;
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        setInterval(nextImage, 3000); // Cambia la imagen cada 3 segundos
+    }
 </script>
-
-
 </body>
 </html>

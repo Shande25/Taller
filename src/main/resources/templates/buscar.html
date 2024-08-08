@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buscar Películas</title>
+</head>
+<body>
+<form action="/" method="get">
+    <input type="text" name="query" placeholder="Buscar películas" />
+    <button type="submit">Buscar</button>
+</form>
+
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+
+<ul>
+    <li th:each="pelicula : ${peliculas}">
+        <span th:text="${pelicula.nombre}"></span> -
+        <span th:text="${pelicula.genero}"></span>
+    </li>
+</ul>
+</body>
+</html>

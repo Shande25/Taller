@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Suscripción - Netflix</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #141414;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links a, .right-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        .nav-links a:hover, .right-links a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            flex: 1;
+            padding: 80px 20px 20px;
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+        }
+
+        .form-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin: 0 auto; /* Centra horizontalmente en el espacio disponible */
+            position: relative; /* Para posicionar el botón abajo */
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input[type="text"], .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #E50914;
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #b81d24;
+        }
+
+        .footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .manage-subscriptions {
+            display: block;
+            margin-top: 20px;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            width: fit-content;
+            align-self: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .manage-subscriptions:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">
+        <img src="/imagenes/Logonetflix.png" alt="Logo Netflix">
+    </div>
+    <div class="nav-links">
+        <a href="/index">Inicio</a>
+        <a href="#novela">Novelas</a>
+        <a href="/quienesSomos">Quienes Somos</a>
+    </div>
+</nav>
+
+<div class="content">
+    <div class="form-container">
+        <h2>Asignar Suscripción</h2>
+        <form action="/procesarAsignacion" method="post">
+            <div class="form-group">
+                <label for="tipo">Tipo de Plan</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="familiar">Familiar</option>
+                    <option value="individual">Individual</option>
+                    <option value="pareja">Pareja</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio" required>
+            </div>
+            <div class="form-group">
+                <label for="duracion">Duración</label>
+                <input type="text" id="duracion" name="duracion" placeholder="Ingrese la duración (ej. 1 mes)" required>
+            </div>
+            <div class="form-group">
+                <label for="usuario">Seleccionar Usuario</label>
+                <select id="usuario" name="usuario" required>
+                    <option th:each="usuario : ${usuarios}"
+                            th:value="${usuario.id}"
+                            th:text="${usuario.nombre}">Usuario</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Asignar Suscripción">
+            </div>
+        </form>
+        <a href="/admin/suscripciones" class="manage-subscriptions">Administrar Suscripciones</a>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Netflix. Todos los derechos reservados.</p>
+</div>
+</body>
+</html>
