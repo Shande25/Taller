@@ -1,155 +1,221 @@
-    <!DOCTYPE html>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Suscripciones</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <link rel="stylesheet" th:href="@{/css/estilos.css}">
-        <style>
-            body {
-                background-color: #141414;
-                color: black;
-                font-family: 'Arial', sans-serif;
-            }
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suscripciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #141414;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-            .navbar {
-                background-color: #000;
-                padding: 15px;
-            }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
 
-            .navbar-brand img {
-                height: 40px;
-            }
+        .logo img {
+            height: 40px;
+        }
 
-            .container {
-                margin-top: 50px;
-            }
+        .nav-links a, .right-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 10px;
+        }
 
-            .table {
-                background-color: #333;
-                border-radius: 5px;
-                overflow: hidden;
-            }
+        .nav-links a:hover, .right-links a:hover {
+            text-decoration: underline;
+        }
 
-            .table thead {
-                background-color: #222;
-            }
+        .container {
+            flex: 1;
+            padding: 80px 20px 20px;
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+        }
 
-            .table thead th {
-                color: black;
-                font-weight: bold;
-            }
+        .form-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin: 0 auto; /* Centra horizontalmente en el espacio disponible */
+            position: relative; /* Para posicionar el botón abajo */
+        }
 
-            .table tbody tr {
-                border-bottom: 1px solid #444;
-            }
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
 
-            .table tbody td {
-                color: #ccc;
-            }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-            .table-hover tbody tr:hover {
-                background-color: #444;
-            }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
 
-            .btn {
-                border-radius: 5px;
-            }
+        .form-group input[type="text"], .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            font-size: 16px;
+        }
 
-            .btn-primary {
-                background-color: #E50914;
-                border: none;
-            }
+        .form-group input[type="submit"] {
+            background-color: #E50914;
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
 
-            .btn-primary:hover {
-                background-color: #b81d24;
-            }
+        .form-group input[type="submit"]:hover {
+            background-color: #b81d24;
+        }
 
-            .btn-warning {
-                background-color: #f1c40f;
-                border: none;
-            }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
 
-            .btn-warning:hover {
-                background-color: #f39c12;
-            }
+        .manage-subscriptions {
+            display: block;
+            margin-top: 20px;
+            background-color: #E50914;
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            width: fit-content;
+            align-self: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
 
-            .btn-danger {
-                background-color: #e74c3c;
-                border: none;
-            }
+        .manage-subscriptions:hover {
+            background-color: #b81d24;
+        }
 
-            .btn-danger:hover {
-                background-color: #c0392b;
-            }
+        .btn-primary {
+            background-color: #E50914;
+            border-color: #E50914;
+            margin-top: 10px; /* Añadido para margen superior */
+        }
 
-            .btn-success {
-                background-color: #2ecc71;
-                border: none;
-            }
+        .btn-primary:hover {
+            background-color: #b81d24;
+            border-color: #b81d24;
+        }
 
-            .btn-success:hover {
-                background-color: #27ae60;
-            }
+        .btn-success {
+            background-color: #008000;
+            border-color: #008000;
+        }
 
-            .btn-secondary {
-                background-color: #7f8c8d;
-                border: none;
-            }
+        .btn-success:hover {
+            background-color: #006400;
+            border-color: #006400;
+        }
 
-            .btn-secondary:hover {
-                background-color: #95a5a6;
-            }
+        .btn-secondary {
+            background-color: #555;
+            border-color: #555;
+        }
 
-            .input-group input {
-                background-color: #333;
-                border: 1px solid #555;
-                color: #fff;
-            }
+        .btn-secondary:hover {
+            background-color: #777;
+            border-color: #777;
+        }
 
-            .input-group button {
-                background-color: #E50914;
-                border: none;
-                color: #fff;
-            }
+        .btn-warning {
+            background-color: #FFA500;
+            border-color: #FFA500;
+        }
 
-            .input-group button:hover {
-                background-color: #b81d24;
-            }
-        </style>
-    </head>
-    <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="/imagenes/Logonetflix.png" alt="Logo Netflix">
-            </a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Novelas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Quienes Somos</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        .btn-warning:hover {
+            background-color: #FF8C00;
+            border-color: #FF8C00;
+        }
 
-    <div class="container">
-        <h2 class="mb-4">Lista de Suscripciones</h2>
+        .btn-danger {
+            background-color: #E50914;
+            border-color: #E50914;
+        }
+
+        .btn-danger:hover {
+            background-color: #b81d24;
+            border-color: #b81d24;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">
+        <img src="/imagenes/Logonetflix.png" alt="Logo Netflix">
+    </div>
+    <div class="nav-links">
+        <a href="/index">Inicio</a>
+        <a href="/#novela">Novelas</a>
+        <a href="/quienesSomos">Quienes Somos</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Lista de Suscripciones</h2>
 
         <!-- Formulario de búsqueda -->
         <form th:action="@{/admin/suscripciones}" method="get" class="mb-3">
-            <div class="input-group">
-                <input type="text" name="buscarSuscripcion" class="form-control" placeholder="Buscar suscripción" th:value="${buscarSuscripcion}">
-                <button class="btn btn-primary" type="submit">Buscar</button>
+            <div class="form-group">
+                <label for="buscarSuscripcion">Buscar suscripción</label>
+                <div class="input-group">
+                    <input type="text" id="buscarSuscripcion" name="buscarSuscripcion" class="form-control" placeholder="Buscar suscripción" th:value="${buscarSuscripcion}">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
             </div>
         </form>
 
@@ -179,10 +245,15 @@
         </table>
 
         <!-- Botones adicionales -->
-        <div class="mt-3">
+        <div class="form-group">
             <a th:href="@{/suscripcion}" class="btn btn-success">Nueva Suscripción</a>
             <a th:href="@{/productos/pdf}" class="btn btn-secondary">Exportar PDF</a>
         </div>
     </div>
-    </body>
-    </html>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Netflix. Todos los derechos reservados.</p>
+</div>
+</body>
+</html>

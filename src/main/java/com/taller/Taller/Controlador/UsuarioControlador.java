@@ -32,6 +32,11 @@ public class UsuarioControlador {
         if (bindingResult.hasErrors()) {
             return "registroUsuario";
         } else {
+            Optional<Usuarios> usuarioExistente = usuarioServicio.buscarPorEmail(usuario.getEmail());
+            if (usuarioExistente.isPresent()) {
+                model.addAttribute("emailError", "El email ya está registrado.");
+                return "registroUsuario";
+            }
             this.usuarioServicio.guardarUsuario(usuario);
             return "index";
         }
