@@ -95,60 +95,49 @@
             font-size: 16px; /* Ajuste del tamaño de la fuente */
         }
 
-        .benefit-section {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            padding: 50px 20px;
-            background-color: black;
-            text-align: center;
-        }
+.benefit-container {
+    max-width: 1200px; /* Ajusta el ancho máximo del contenedor general */
+    margin: 0 auto; /* Centra el contenedor en la página */
+    padding: 20px; /* Espacio interno alrededor del contenedor */
+}
 
-        .benefit {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1000px; /* Aumenta el ancho máximo del contenedor */
-            margin: auto;
-            text-align: left;
-            gap: 150px; /* Incrementa el espacio entre la imagen y el texto */
-        }
+.benefit {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Aumenta el espacio entre la imagen y el texto */
+    margin-bottom: 40px; /* Espacio entre cada bloque de beneficio */
+}
 
-        .benefit img {
-            width: 100%;
-            max-width: 400px; /* Ajusta el tamaño máximo de la imagen */
-            border-radius: 8px;
-        }
+.benefit-left {
+    flex-direction: row; /* Imagen a la izquierda, texto a la derecha */
+}
 
-        .benefit-right .benefit-text {
-            order: 1;
-            text-align: left;
-            margin-right: 0; /* Elimina márgenes adicionales */
-            max-width: 50%; /* Asegura que el texto tenga suficiente espacio */
-        }
+.benefit-right {
+    flex-direction: row-reverse; /* Imagen a la derecha, texto a la izquierda */
+}
 
-        .benefit-right img {
-            order: 2;
-        }
+.benefit img {
+    width: 400px; /* Tamaño de las imágenes */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 8px; /* Bordes redondeados */
+}
 
-        .benefit-left .benefit-text {
-            order: 2;
-            text-align: left;
-            margin-left: 0; /* Elimina márgenes adicionales */
-            max-width: 50%; /* Asegura que el texto tenga suficiente espacio */
-        }
+.benefit-text {
+    max-width: 500px; /* Limita el ancho del texto */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
 
-        .benefit-left img {
-            order: 1;
-        }
+.benefit-title {
+    font-size: 2rem; /* Tamaño de fuente más grande para el título */
+    font-weight: bold; /* Texto en negrita */
+    margin-bottom: 10px; /* Espacio debajo del título */
+}
 
-        .benefit-title {
-            font-size: 2.5rem; /* Tamaño de fuente más grande */
-            font-weight: bold;
-            text-align: center;
-            animation: colorChange 7s infinite; /* Animación de cambio de color */
-        }
-
+.benefit p {
+    font-size: 1.1rem; /* Tamaño de fuente del párrafo */
+    line-height: 1.6; /* Espaciado entre líneas del párrafo */
+    color: #555; /* Color de texto para una mejor legibilidad */
+}
         /* Definición de la animación de cambio de color */
         @keyframes colorChange {
             0% {
@@ -244,52 +233,42 @@
     </form>
 </section>
 <br><br>
-<div class="benefit benefit-right">
-    <div class="benefit-text">
-        <h3 class="benefit-title">Disfruta en tu TV</h3>
-        <p>Ve en smart TV, PlayStation, Xbox, Chromecast, Apple TV, reproductores de Blu-ray y más.</p>
-=======
-    <div class="nav-links">
-        <a href="/index">Inicio</a>
-        <a href="#novelas">Novelas</a>
-        <a href="/quienesSomos">Quienes Somos</a>
+<div class="benefit-container">
+    <div class="benefit benefit-left">
+        <img src="https://cdn.dribbble.com/users/1315134/screenshots/14799541/media/31f78f560d56d9931b8c0ae6b5f35d81.gif" alt="Disfruta en tu TV">
+        <div class="benefit-text">
+            <h3 class="benefit-title">Disfruta en tu TV</h3>
+            <p>Ve en smart TV, PlayStation, Xbox, Chromecast, Apple TV, reproductores de Blu-ray y más.</p>
+        </div>
     </div>
-    <div id="searchResults" class="search-results"></div>
-    <div class="right-links">
-        <a href="/iniciarsesion" class="subscribe-button">Iniciar sesión</a>
-        <a href="/registro" class="subscribe-button">Registrarse</a>
-        <a href="/suscripcion" class="subscribe-button">Suscripción</a>
-
+    <br>
+    <br>
+    <div class="benefit benefit-right">
+        <div class="benefit-text">
+            <h3 class="benefit-title">Descarga tus series para verlas offline</h3>
+            <p>Guarda tu contenido favorito y tendrás siempre algo para ver.</p>
+        </div>
+        <img src="https://cdn.dribbble.com/users/2346967/screenshots/6594505/tv-app.gif" alt="Descarga tus series para verlas offline">
     </div>
-    <img src="https://cdn.dribbble.com/users/1315134/screenshots/14799541/media/31f78f560d56d9931b8c0ae6b5f35d81.gif" alt="Disfruta en tu TV">
-</div>
-<br><br><br>
-<div class="benefit benefit-left">
-    <img src="https://cdn.dribbble.com/users/2346967/screenshots/6594505/tv-app.gif" alt="Descarga tus series para verlas offline">
-    <div class="benefit-text">
-        <h3 class="benefit-title">Descarga tus series para verlas offline</h3>
-        <p>Guarda tu contenido favorito y tendrás siempre algo para ver.</p>
+    <br>
+    <br>
+    <div class="benefit benefit-left">
+        <img src="https://stateless-fueradefoco.storage.googleapis.com/wp-content/uploads/2018/02/30183520/movies-at-home-gif.gif" alt="Disfruta donde quieras">
+        <div class="benefit-text">
+            <h3 class="benefit-title">Disfruta donde quieras</h3>
+            <p>Películas y series ilimitadas en tu teléfono, tablet, laptop y TV.</p>
+        </div>
     </div>
-</div>
-<br><br><br>
-<div class="benefit benefit-right">
-    <div class="benefit-text">
-        <h3 class="benefit-title">Disfruta donde quieras</h3>
-        <p>Películas y series ilimitadas en tu teléfono, tablet, laptop y TV.</p>
-    </div>
-    <img src="https://stateless-fueradefoco.storage.googleapis.com/wp-content/uploads/2018/02/30183520/movies-at-home-gif.gif" alt="Disfruta donde quieras">
-</div>
-<br><br><br>
-<div class="benefit benefit-left">
-    <img src="https://occ-0-228-3934.1.nflxso.net/dnm/api/v6/19OhWN2dO19C9txTON9tvTFtefw/AAAABS2wPb0M8BZZsg7maAVHhc1rfAZm9RWMpYfL95TcWCTiT1OvZGx4qg2NVvAtqK_AONqNNWbJYzdgVvbgrQGgag-qgYnKEi2RKM9A.png?r=25d" alt="Crea perfiles para niños">
-    <div class="benefit-text">
-        <h3 class="benefit-title">Crea perfiles para niños</h3>
-        <p>Los niños vivirán aventuras con sus personajes favoritos en un espacio diseñado exclusivamente para ellos.</p>
+    <br>
+    <br>
+    <div class="benefit benefit-right">
+        <img src="https://occ-0-228-3934.1.nflxso.net/dnm/api/v6/19OhWN2dO19C9txTON9tvTFtefw/AAAABS2wPb0M8BZZsg7maAVHhc1rfAZm9RWMpYfL95TcWCTiT1OvZGx4qg2NVvAtqK_AONqNNWbJYzdgVvbgrQGgag-qgYnKEi2RKM9A.png?r=25d" alt="Crea perfiles para niños">
+        <div class="benefit-text">
+            <h3 class="benefit-title">Crea perfiles para niños</h3>
+            <p>Los niños vivirán aventuras con sus personajes favoritos en un espacio diseñado exclusivamente para ellos.</p>
+        </div>
     </div>
 </div>
-</div>
-</section>
-
 <footer class="footer">
     <p>&copy; 2024 Netflix, Inc.</p>
     <ul class="footer-links">
