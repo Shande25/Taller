@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #141414;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            cursor: pointer;
+        }
+
+        .featured {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        #featured-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .categories {
+            padding: 20px;
+        }
+
+        .category {
+            margin-bottom: 20px;
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .thumbnail {
+            width: 200px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .thumbnail p {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .thumbnail video {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>Inicio</li>
+            <li>Series</li>
+            <li>Películas</li>
+            <li>Novedades populares</li>
+            <li>Mi lista</li>
+            <li>Explora por idiomas</li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section class="featured">
+        <iframe id="featured-video" width="100%" height="100%" src="https://www.youtube.com/embed/V9NLRnpaxeo?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="video-controls">
+            <button id="mute-toggle">Encender audio</button>
+        </div>
+        <div class="overlay">
+            <h1>La Probabilidad Estadística del Amor a Primera Vista</h1>
+            <button>Reproducir</button>
+            <button>Más información</button>
+        </div>
+    </section>
+    <section class="categories">
+        <div class="category">
+            <h2>Hecho en Corea</h2>
+            <div class="thumbnails">
+                <div class="thumbnail" data-video="https://www.youtube.com/embed/V9NLRnpaxeo?si=M1iOQ8SfeMK8BFKH">
+                    <img src="https://es.web.img3.acsta.net/pictures/22/07/18/09/46/0231821.jpg" alt="Titulo 1">
+                    <p>Ventisca de Verano</p>
+                    <iframe src="https://www.youtube.com/embed/V9NLRnpaxeo?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="thumbnail" data-video="ruta/a/tu/video2.mp4">
+                    <img src="https://ruta/a/tu/imagen2.jpg" alt="Titulo 2">
+                    <p>Ella de la Noche</p>
+                    <video src="ruta/a/tu/video2.mp4" muted></video>
+                </div>
+                <!-- Añade más miniaturas según sea necesario -->
+            </div>
+        </div>
+        <!-- Añade más categorías según sea necesario -->
+    </section>
+</main>
+<script>
+    document.getElementById('mute-toggle').addEventListener('click', function() {
+        const video = document.getElementById('featured-video');
+        video.muted = !video.muted;
+        this.textContent = video.muted ? 'Encender audio' : 'Apagar audio';
+    });
+
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('mouseenter', function() {
+            const video = this.querySelector('video');
+            video.play();
+        });
+
+        thumbnail.addEventListener('mouseleave', function() {
+            const video = this.querySelector('video');
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+</script>
+</body>
+</html>

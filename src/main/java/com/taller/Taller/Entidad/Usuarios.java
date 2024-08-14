@@ -1,10 +1,7 @@
     package com.taller.Taller.Entidad;
 
-    import jakarta.persistence.Column;
-    import jakarta.persistence.Entity;
-    import jakarta.persistence.GeneratedValue;
-    import jakarta.persistence.GenerationType;
-    import jakarta.persistence.Id;
+    import com.taller.Taller.Roles.Rol;
+    import jakarta.persistence.*;
     import lombok.Data;
     import lombok.Generated;
     @Data
@@ -28,6 +25,9 @@
 
         @Column(nullable = false)
         private String telefono;
+
+        @Enumerated(EnumType.STRING)
+        private Rol rol;
 
         @Generated
         public Usuarios() {

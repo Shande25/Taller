@@ -18,22 +18,23 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    public UsuarioControlador() {
-    }
-
     @GetMapping({"/registro"})
     public String mostrarFormularioDeRegistro(Model model) {
         model.addAttribute("usuario", new Usuarios());
         return "registroUsuario";
     }
 
-    @PostMapping({"/registrar"})
+    @PostMapping("/registrar")
     public String registrar(@Validated @ModelAttribute("usuario") Usuarios usuario, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            return "registroUsuario"; // Asegúrate de que la vista 'registroUsuario' exista
+        }
+        try {
+            usuarioServicio.registrar(usuario.getNombre(), usuario.getEmail(), usuario.getPassword());
+            return "redirect:/index"; // Redirige a 'index' en lugar de 'index.html'
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al registrar el usuario: " + e.getMessage());
             return "registroUsuario";
-        } else {
-            this.usuarioServicio.guardarUsuario(usuario);
-            return "index";
         }
     }
 
@@ -41,21 +42,5 @@ public class UsuarioControlador {
     public String mostrarFormularioDeInicioSesion(Model model) {
         model.addAttribute("usuario", new Usuarios());
         return "inicioseccion";
-    }
-
-    @PostMapping({"/login"})
-    public String iniciarSesion(@Validated @ModelAttribute("usuario") Usuarios usuario, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "inicioseccion";
-        }
-
-        Optional<Usuarios> usuarioExistente = usuarioServicio.buscarPorEmail(usuario.getEmail());
-
-        if (usuarioExistente.isEmpty() || !usuarioExistente.get().getPassword().equals(usuario.getPassword())) {
-            model.addAttribute("error", "Email o contraseña incorrectos");
-            return "inicioseccion";
-        }
-
-        return "index";
     }
 }
