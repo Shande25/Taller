@@ -171,18 +171,12 @@
                 <input type="text" id="duracion" name="duracion" placeholder="Ingrese la duración (ej. 1 mes)" required>
             </div>
             <div class="form-group">
-                <label for="usuario">Seleccionar Usuario</label>
-                <select id="usuario" name="usuario" required>
-                    <option th:each="usuario : ${usuarios}"
-                            th:value="${usuario.id}"
-                            th:text="${usuario.nombre}">Usuario</option>
-                </select>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Asignar Suscripción">
             </div>
         </form>
-        <a href="/admin/suscripciones" class="manage-subscriptions">Administrar Suscripciones</a>
+        <!-- Mostrar el botón solo si el usuario es ADMIN -->
+        <a th:if="${isAdmin}" href="/admin/suscripciones" class="manage-subscriptions">Administrar Suscripciones</a>
+        <a th:if="${isAdmin}" href="/solicitudes" class="manage-subscriptions">Ver Solicitudes</a>
     </div>
 </div>
 

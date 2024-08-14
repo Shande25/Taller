@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agradecimiento - Netflix</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #141414;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-container {
+            text-align: center;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .message-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .message-container p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .home-button {
+            background-color: #E50914;
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #b81d24;
+        }
+    </style>
+</head>
+<body>
+<div class="message-container">
+    <h1>¡Gracias!</h1>
+    <p>La suscripción ha sido asignada exitosamente.</p>
+    <a th:href="@{/factura/pdf}" class="home-button">Descargar Factura</a>
+    <a href="/suscripcion" class="home-button">Volver a Suscripciones</a>
+</div>
+</body>
+</html>

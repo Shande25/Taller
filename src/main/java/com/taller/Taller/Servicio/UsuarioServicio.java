@@ -1,7 +1,6 @@
 package com.taller.Taller.Servicio;
 
 import com.taller.Taller.Entidad.Usuarios;
-import com.taller.Taller.Exceptions.MiException;
 import com.taller.Taller.Repositorio.UsuarioRepositorio;
 import com.taller.Taller.Roles.Rol;
 import jakarta.transaction.Transactional;
@@ -15,7 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,32 +26,30 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public void registrar(String nombre, String email, String password) {
-        // Codificar la contraseña
+    public void registrar(String nombre, String email, String password, String fechaNacimiento, String telefono) {
         String encodedPassword = passwordEncoder.encode(password);
 
-        // Crear un nuevo usuario
         Usuarios usuario = new Usuarios();
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         usuario.setPassword(encodedPassword);
+        usuario.setFechaNacimiento(fechaNacimiento);
+        usuario.setTelefono(telefono);
+        usuario.setRol(Rol.USER);
 
-        // Guardar el usuario en la base de datos
         usuarioRepositorio.save(usuario);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuarios> optionalUsuario = usuarioRepositorio.buscarUsuarioByEmail(email);
-        if (optionalUsuario.isPresent()) {
-            Usuarios usuario = optionalUsuario.get();
-            List<GrantedAuthority> permisos = new ArrayList<>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-            permisos.add(p);
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-        } else {
-            throw new UsernameNotFoundException("Usuario no encontrado con email: " + email);
-        }
+        Usuarios usuario = usuarioRepositorio.buscarUsuarioByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con email: " + email));
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
+        return new User(usuario.getEmail(), usuario.getPassword(), authorities);
+    }
+
+    public Optional<Usuarios> buscarUsuarioByEmail(String email) {
+        return usuarioRepositorio.buscarUsuarioByEmail(email);
     }
 
     public List<Usuarios> listaUsuarios() {
@@ -70,9 +66,5 @@ public class UsuarioServicio implements UserDetailsService {
 
     public void eliminarUsuario(Long id) {
         this.usuarioRepositorio.deleteById(id);
-    }
-
-    public Optional<Usuarios> buscarPorEmail(String email) {
-        return usuarioRepositorio.buscarUsuarioByEmail(email);
     }
 }

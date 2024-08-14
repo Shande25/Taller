@@ -5,61 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
     <style>
+        /* Tus estilos aquí */
         body {
             font-family: Arial, sans-serif;
             background-color: #141414;
             color: white;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         header {
-            background-color: #141414;
+            background-color: #000;
             padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 30;
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            height: 60px;
         }
 
-        nav ul {
-            list-style: none;
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-buttons {
             display: flex;
-            gap: 20px;
-            padding: 0;
-            margin: 0;
+            gap: 10px;
         }
 
-        nav ul li {
+        .nav-buttons a,
+        .nav-buttons .logout-button {
+            background-color: #e50914;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-buttons a:hover,
+        .nav-buttons .logout-button:hover {
+            background-color: #b81d13;
         }
 
         .featured {
             position: relative;
-            width: 100%;
-            height: 60vh;
+            width: 100vw;
+            height: 56.25vw;
             background-color: black;
+            margin-top: 0;
+            padding-top: 0px;
             overflow: hidden;
         }
 
-        #featured-video {
+        .featured iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            border: none;
             object-fit: cover;
-        }
-
-        .video-controls {
-            position: absolute;
-            top: 20px;
-            right: 20px;
         }
 
         .overlay {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            z-index: 20;
+            box-sizing: border-box;
+        }
+
+        .overlay-content {
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .overlay-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 0;
+            white-space: pre-line;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .featured h1 {
+            font-size: 3rem;
+            color: #e50914;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        .featured .buttons {
+            margin-top: 20px;
+        }
+
+        .featured .buttons button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .featured .buttons .play {
+            background-color: white;
+            color: black;
+        }
+
+        .featured .buttons .info {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: white;
         }
 
         .categories {
             padding: 20px;
+            display: block;
         }
 
         .category {
@@ -73,15 +151,20 @@
         }
 
         .thumbnail {
-            width: 200px;
-            cursor: pointer;
+            width: 300px;
+            height: 200px;
             position: relative;
-            border-radius: 5px;
             overflow: hidden;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            background-color: black;
         }
 
         .thumbnail img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 5px;
         }
 
@@ -90,81 +173,176 @@
             margin-top: 5px;
         }
 
-        .thumbnail video {
-            width: 100%;
+        .thumbnail iframe {
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
             z-index: 10;
-            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .thumbnail:hover iframe {
+            opacity: 1;
+        }
+
+        .footer {
+            background-color: #000; /* Color de fondo del pie de página */
+            color: #fff; /* Color del texto del pie de página */
+            text-align: center;
+            padding: 10px;
+            margin-top: auto; /* Empuja el pie de página al final de la página */
+        }
+
+        .footer p {
+            margin: 0;
         }
     </style>
 </head>
 <body>
 <header>
-    <nav>
-        <ul>
-            <li>Inicio</li>
-            <li>Series</li>
-            <li>Películas</li>
-            <li>Novedades populares</li>
-            <li>Mi lista</li>
-            <li>Explora por idiomas</li>
-        </ul>
-    </nav>
+    <div class="logo">
+        <a href="/index">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Logo">
+        </a>
+    </div>
+    <div class="nav-buttons">
+        <!-- Botón de suscripción -->
+        <a href="/suscripcion" class="manage-subscriptions">Suscripción</a>
+        <!-- Botón de solicitud -->
+        <a href="/solicitud-administrador" class="manage-subscriptions">Solicitud</a>
+        <!-- Botón de cerrar sesión -->
+        <form id="logout-form" action="/logout" method="POST" style="display: none;">
+            <input type="hidden" name="_csrf" value="${_csrf.token}" />
+        </form>
+        <button class="logout-button" onclick="document.getElementById('logout-form').submit();">Cerrar sesión</button>
+    </div>
 </header>
 <main>
-    <section class="featured">
-        <iframe id="featured-video" width="100%" height="100%" src="https://www.youtube.com/embed/V9NLRnpaxeo?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <div class="video-controls">
-            <button id="mute-toggle">Encender audio</button>
-        </div>
+    <div class="featured">
+        <iframe id="main-video" src="https://www.youtube.com/embed/TbiPcMCz0Ek?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <div class="overlay">
-            <h1>La Probabilidad Estadística del Amor a Primera Vista</h1>
-            <button>Reproducir</button>
-            <button>Más información</button>
-        </div>
-    </section>
-    <section class="categories">
-        <div class="category">
-            <h2>Hecho en Corea</h2>
-            <div class="thumbnails">
-                <div class="thumbnail" data-video="https://www.youtube.com/embed/V9NLRnpaxeo?si=M1iOQ8SfeMK8BFKH">
-                    <img src="https://es.web.img3.acsta.net/pictures/22/07/18/09/46/0231821.jpg" alt="Titulo 1">
-                    <p>Ventisca de Verano</p>
-                    <iframe src="https://www.youtube.com/embed/V9NLRnpaxeo?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div class="overlay-content">
+                <h1>Blancanieves</h1>
+                <p>Una joven princesa, con la ayuda de siete enanitos, lucha por liberar su reino de la malvada madrastra que la ha envidiado.</p>
+                <div class="buttons">
+                    <button class="play">Reproducir</button>
+                    <button class="info">Más información</button>
                 </div>
-                <div class="thumbnail" data-video="ruta/a/tu/video2.mp4">
-                    <img src="https://ruta/a/tu/imagen2.jpg" alt="Titulo 2">
-                    <p>Ella de la Noche</p>
-                    <video src="ruta/a/tu/video2.mp4" muted></video>
-                </div>
-                <!-- Añade más miniaturas según sea necesario -->
             </div>
         </div>
-        <!-- Añade más categorías según sea necesario -->
+    </div>
+    <section class="categories">
+        <!-- Categoría de Novelas -->
+        <div class="category">
+            <h2>Novelas</h2>
+            <div class="thumbnails">
+                <a href="/vista20" class="thumbnail">
+                    <img src="https://elpopular.cronosmedia.glr.pe/original/2022/05/01/625b40fffee08773835d43b2.jpg" alt="Titulo 1">
+                    <p>Veinticinco, veintiuno</p>
+                    <iframe src="https://www.youtube.com/embed/V9NLRnpaxeo?autoplay=1&mute=1&controls=0&showinfo=0&rel=0" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="/vistaPropuesta" class="thumbnail">
+                    <img src="https://images.justwatch.com/poster/317257102/s718/a-business-proposal.jpg" alt="Titulo 2">
+                    <p>Propuesta laboral</p>
+                    <iframe src="https://www.youtube.com/embed/2YaT4kfYb0w?autoplay=1&mute=1&controls=0&showinfo=0&rel=0" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="/vistaBelleza" class="thumbnail">
+                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/copesa/7ZQQXP5PMFEIBJS2HESUDMEESY.jpg" alt="Titulo 3">
+                    <p>Belleza Verdadera</p>
+                    <iframe src="https://www.youtube.com/embed/QhifxN8EBiI?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=QhifxN8EBiI" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="/vistaAmor" class="thumbnail">
+                    <img src="https://media.themoviedb.org/t/p/w780/sGDC1ucGrbbrM3Lg9YD2zpSIFcS.jpg" alt="Titulo 4">
+                    <p>Amor Tan Hermoso</p>
+                    <iframe src="https://www.youtube.com/embed/hZ41S5-X6UE?autoplay=1&loop=1&playlist=hZ41S5-X6UE&mute=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="pagina5.html" class="thumbnail">
+                    <img src="https://media.vogue.mx/photos/651ec8d9c73a0598ef2b3359/4:3/w_2664,h_1998,c_limit/doona!-netflix.jpg" alt="Titulo 5">
+                    <p>Doona</p>
+                    <iframe src="https://www.youtube.com/embed/MVP3jQm4tK4?autoplay=1&loop=1&playlist=MVP3jQm4tK4&mute=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+            </div>
+        </div>
+
+        <!-- Categoría de Películas -->
+        <div class="category">
+            <h2>Películas</h2>
+            <div class="thumbnails">
+                <a href="/vistaDeadPool" class="thumbnail">
+                    <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DDD02B809D3240532CA4CA1D8428986EBA7ABFFA703FFD61CE49C743D34FFD12/scale?width=506&amp;aspectRatio=2.00&amp;format=webp" alt="Titulo 6">
+                    <p>DeadPool</p>
+                    <iframe src="https://www.youtube.com/embed/731PZ7t7KTg?autoplay=1&loop=1&playlist=731PZ7t7KTg&mute=1&controls=0&modestbranding=1&playsinline=0" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="/vistaAlita" class="thumbnail">
+                    <img src="https://areajugones.sport.es/wp-content/uploads/2023/11/alita-angel-de-combate-1.jpg" alt="Titulo 7">
+                    <p>Alita</p>
+                    <iframe src="https://www.youtube.com/embed/V4HWwrDoU0U?autoplay=1&loop=1&playlist=V4HWwrDoU0U&mute=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="/vistaLibro" class="thumbnail">
+                    <img src="https://i.blogs.es/e4dd11/cartel-libro-de-la-vida/1366_2000.jpg" alt="Titulo 8">
+                    <p>Libro de la vida</p>
+                    <iframe src="https://www.youtube.com/embed/RYXV0Uf78DA?autoplay=1&loop=1&playlist=RYXV0Uf78DA&mute=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="/vistaCorrer" class="thumbnail">
+                    <img src="https://finde.latercera.com/wp-content/uploads/2014/09/cine-Maze-Runner.jpg" alt="Titulo 9">
+                    <p>Correr o Morrir</p>
+                    <iframe src="https://www.youtube.com/embed/KNYPRt6SfrE?autoplay=1&mute=1&controls=0&showinfo=0&rel=0" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+                <a href="pagina10.html" class="thumbnail">
+                    <img src="https://images.mediotiempo.com/o3MB0p19n__nxydiEzKMlZPodNE=/300x186/uploads/media/2023/10/16/caroline-y-la-puerta-secreta_8_0_496_308.jpeg" alt="Titulo 10">
+                    <p>Caroline</p>
+                    <iframe src="https://www.youtube.com/embed/fvT7W5LHxF4?autoplay=1&mute=1&controls=0&showinfo=0&rel=0" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                </a>
+            </div>
+        </div>
     </section>
+
+    <footer class="footer">
+        <p>&copy; 2024  Netflix. Todos los derechos reservados.</p>
+    </footer>
+
 </main>
 <script>
-    document.getElementById('mute-toggle').addEventListener('click', function() {
-        const video = document.getElementById('featured-video');
-        video.muted = !video.muted;
-        this.textContent = video.muted ? 'Encender audio' : 'Apagar audio';
-    });
+    // Carga la API de YouTube IFrame
+    function loadYouTubeAPI(callback) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        window.onYouTubeIframeAPIReady = callback;
+    }
 
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach(thumbnail => {
-        thumbnail.addEventListener('mouseenter', function() {
-            const video = this.querySelector('video');
-            video.play();
+    // Inicializa el reproductor de video
+    function initVideoPlayer() {
+        const player = new YT.Player('main-video', {
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
         });
+    }
 
-        thumbnail.addEventListener('mouseleave', function() {
-            const video = this.querySelector('video');
-            video.pause();
-            video.currentTime = 0;
-        });
-    });
+    // Función que se llama cuando el estado del reproductor cambia
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+            // Reproduce el video nuevamente cuando termine
+            event.target.seekTo(0);
+            event.target.playVideo();
+        }
+    }
+
+    // Cargar la API y luego inicializar el reproductor
+    loadYouTubeAPI(initVideoPlayer);
 </script>
 </body>
 </html>
+
+

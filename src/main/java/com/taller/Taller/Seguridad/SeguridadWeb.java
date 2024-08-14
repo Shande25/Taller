@@ -30,8 +30,10 @@ public class SeguridadWeb {
         http
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/admin/*").hasRole("ADMIN")
-                                .requestMatchers("/css/**", "/js/**", "/img/**", "/registro", "/registrar").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN") // Permite acceso solo a ADMIN
+                                .requestMatchers("/suscripcion/**").authenticated()
+                                .requestMatchers("/css/**", "/js/**", "/img/**", "/registro", "/registrar", "/iniciarsesion", "/agradecimiento").permitAll() // Permitir acceso a /agradecimiento
+                                .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin
@@ -39,14 +41,18 @@ public class SeguridadWeb {
                                 .loginProcessingUrl("/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
-                                .defaultSuccessUrl("/inicio")
+                                .defaultSuccessUrl("/home")
                                 .permitAll()
                 )
                 .logout(logout ->
-                        logout.logoutUrl("/logout")
-                                .logoutSuccessUrl("/iniciarsesion")
+                        logout
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/iniciarsesion?logout")
+                                .invalidateHttpSession(true)
+                                .deleteCookies("JSESSIONID")
                                 .permitAll()
-                );
+                )
+                .csrf().disable();
         return http.build();
     }
 

@@ -223,7 +223,7 @@
 </head>
 <body>
 
-<<<<<<< HEAD
+
 <section class="hero-section">
     <header class="header">
         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix Logo" class="logo"> <!-- Reemplaza la URL con el nuevo logo -->
@@ -232,6 +232,10 @@
     <h1>Películas y series ilimitadas y mucho más</h1>
     <h2>Disfruta donde quieras. Cancela cuando quieras.</h2>
     <p>¿Quieres ver Netflix ya? Inicia Sesion con tu cuenta de Netflix.</p>
+
+    <div th:if="${param.logout}" style="color: green; margin-bottom: 20px;">
+        ¡Has cerrado sesión correctamente!
+    </div>
 
     <form th:action="@{/login}" method="post" class="email-form">
         <input type="email" name="email" placeholder="Email" required>
@@ -255,7 +259,7 @@
         <a href="/iniciarsesion" class="subscribe-button">Iniciar sesión</a>
         <a href="/registro" class="subscribe-button">Registrarse</a>
         <a href="/suscripcion" class="subscribe-button">Suscripción</a>
->>>>>>> 2409cf3adeaf8e8c197618b7d5243dd3284053ae
+
     </div>
     <img src="https://cdn.dribbble.com/users/1315134/screenshots/14799541/media/31f78f560d56d9931b8c0ae6b5f35d81.gif" alt="Disfruta en tu TV">
 </div>

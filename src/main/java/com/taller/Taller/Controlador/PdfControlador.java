@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PdfControlador {
     @Autowired
     PdfServicio pdfServicio;
-    @GetMapping("/productos/pdf")
+    @GetMapping("/suscripciones/pdf")
     public ResponseEntity<byte[]> descargarPdf() throws Exception {
         byte[] pdf = pdfServicio.generarPdf();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "productos.pdf");
+        headers.setContentDispositionFormData("attachment", "suscripciones.pdf");
         return new ResponseEntity<>(pdf, headers, HttpStatus.OK);}
 }
