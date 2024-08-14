@@ -35,6 +35,17 @@ public class UsuarioControlador {
         } catch (Exception e) {
             model.addAttribute("error", "Error al registrar el usuario: " + e.getMessage());
             return "registroUsuario";
+<<<<<<< HEAD
+=======
+        } else {
+            Optional<Usuarios> usuarioExistente = usuarioServicio.buscarPorEmail(usuario.getEmail());
+            if (usuarioExistente.isPresent()) {
+                model.addAttribute("emailError", "El email ya está registrado.");
+                return "registroUsuario";
+            }
+            this.usuarioServicio.guardarUsuario(usuario);
+            return "index";
+>>>>>>> 2409cf3adeaf8e8c197618b7d5243dd3284053ae
         }
     }
 
@@ -43,4 +54,24 @@ public class UsuarioControlador {
         model.addAttribute("usuario", new Usuarios());
         return "inicioseccion";
     }
+<<<<<<< HEAD
 }
+=======
+
+    @PostMapping({"/login"})
+    public String iniciarSesion(@Validated @ModelAttribute("usuario") Usuarios usuario, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "inicioseccion";
+        }
+
+        Optional<Usuarios> usuarioExistente = usuarioServicio.buscarPorEmail(usuario.getEmail());
+
+        if (usuarioExistente.isEmpty() || !usuarioExistente.get().getPassword().equals(usuario.getPassword())) {
+            model.addAttribute("error", "Email o contraseña incorrectos");
+            return "inicioseccion";
+        }
+
+        return "index";
+    }
+}
+>>>>>>> 2409cf3adeaf8e8c197618b7d5243dd3284053ae
