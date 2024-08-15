@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -43,6 +41,7 @@ public class UsuarioControlador {
             return "redirect:/iniciarsesion"; // Redirige a la página de inicio de sesión
         } catch (Exception e) {
             model.addAttribute("error", "Error al registrar el usuario: " + e.getMessage());
+            model.addAttribute("usuario", new Usuarios()); // Vacía los datos del formulario en caso de error
             return "registroUsuario"; // Regresa a la vista de registro en caso de error
         }
     }
@@ -71,7 +70,4 @@ public class UsuarioControlador {
         }
         return "home"; // Asegúrate de tener una vista llamada "home"
     }
-
-
-
 }

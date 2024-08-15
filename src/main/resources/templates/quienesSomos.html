@@ -9,7 +9,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             color: #fff;
-            background-color: #141414;
+            background-color: #000; /* Fondo negro uniforme */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -19,7 +19,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 15px 20px;
             background-color: #000;
             position: fixed;
             width: 100%;
@@ -38,8 +38,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            z-index: 1001;
         }
 
         .menu-toggle img {
@@ -71,10 +69,11 @@
             justify-content: center;
             text-align: center;
             position: relative;
+            color: #fff; /* Color del texto en el hero */
         }
 
         .hero img {
-            max-width: 100%;
+            max-width: 50%; /* Ajustar tamaño de la imagen */
             height: auto;
             border-radius: 8px;
             margin-right: 20px;
@@ -92,6 +91,7 @@
         .hero-content p {
             font-size: 1rem;
             line-height: 1.6;
+            margin: 0;
         }
 
         .footer {
@@ -116,7 +116,7 @@
         }
 
         .footer .social-logo img {
-            width: 50px;
+            width: 40px;
             height: auto;
             cursor: pointer;
         }
@@ -171,7 +171,7 @@
         <img src="/imagenes/Logonetflix.png" alt="Logo Netflix">
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">
-        <img src="/imagenes/botonAmburgesa1.jpg" alt="Menu Icon"> <
+        <img src="/imagenes/botonAmburgesa1.jpg" alt="Menu Icon">
     </div>
 </nav>
 
